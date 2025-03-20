@@ -1,11 +1,11 @@
 ## Funções Coesas que Fazem Apenas uma Coisa
 
 # Código Ruim
-def process_and_save_data(data, filename):
+def process_and_save_data(data):
     # Processa os dados
     processed_data = [d.upper() for d in data]
     # Salva os dados no arquivo
-    with open(filename, 'w') as file:
+    with open("arquivo.txt", 'w') as file:
         file.write('\n'.join(processed_data))
 
 
