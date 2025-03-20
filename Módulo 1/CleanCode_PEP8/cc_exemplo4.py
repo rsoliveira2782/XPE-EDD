@@ -4,7 +4,7 @@
 # Código Ruim
 def calculate_total_with_discount(price, discount):
     if discount > 0:
-        total = price - (price * discount)
+        total = price - (price * discount * .1)
     else:
         total = price
     return total
