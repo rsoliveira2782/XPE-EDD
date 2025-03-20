@@ -246,7 +246,7 @@ Para fazer uma consulta rápida ao stream (apenas exibí-lo na tela), podemos fa
 ksql> select * from custstream emit changes;
 ```
 
-O output dessa consulta não é dos melhores pois há um número grande de colunas, dificultando a visualização. Podemos fazer uma consulta mais enxuta com o seguinte código:
+O output dessa consulta não é dos melhores pois há um número grande de colunas, dificultando a visualização. Podemos fazer uma consulta mais enxuta com o seguinte código (projetar):
 
 ```
 ksql> select nome, telefone, email, nascimento, dt_update from custstream emit changes;
