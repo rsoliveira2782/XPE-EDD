@@ -1,4 +1,4 @@
-## Uso apropriado de exceções
+# Uso apropriado de exceções
 
 
 # Código Ruim

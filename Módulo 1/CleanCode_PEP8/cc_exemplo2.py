@@ -1,4 +1,4 @@
-## Código morto ou redundante
+# Código morto ou redundante
 
 # Código Ruim
 def calculate_discount(price):

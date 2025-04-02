@@ -1,4 +1,4 @@
-## Duplicação de Código
+# Duplicação de Código
 
 # Código Ruim
 def print_report(data):
@@ -15,6 +15,7 @@ def print_items(title, items):
     print(title)
     for item in items:
         print(f"Produto: {item['product']}, Quantidade: {item['quantity']}, Preço: {item['price']}")
+
 
 def print_report(data):
     print_items("Relatório de Vendas:", data["sales"])

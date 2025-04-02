@@ -1,4 +1,4 @@
-## função com multiplas responsabilidades
+# função com multiplas responsabilidades
 
 
 # Código Ruim
@@ -16,15 +16,16 @@ def process_data(data):
 def filter_data(data):
     return [item for item in data if item > 10]
 
+
 def sort_data(data):
     return sorted(data)
+
 
 def calculate_average(data):
     return sum(data) / len(data)
 
-def process_data(data):
+
+def process_data_all(data):
     filtered = filter_data(data)
     sorted_data = sort_data(filtered)
     return calculate_average(sorted_data)
-
-

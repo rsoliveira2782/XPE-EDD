@@ -1,4 +1,4 @@
-## Evitar Parâmetros em Excesso
+# Evitar Parâmetros em Excesso
 
 
 # Código Ruim
@@ -12,7 +12,6 @@ def create_user(name, age, email, address, phone, is_active, is_admin):
         "is_active": is_active,
         "is_admin": is_admin
     }
-
 
 
 # Código Bom

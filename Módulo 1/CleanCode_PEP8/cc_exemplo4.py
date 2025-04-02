@@ -1,5 +1,4 @@
-## Código Duplicado
-
+# Código Duplicado
 
 # Código Ruim
 def calculate_total_with_discount(price, discount):
@@ -9,10 +8,10 @@ def calculate_total_with_discount(price, discount):
         total = price
     return total
 
+
 def calculate_total_with_tax(price, tax):
     total = price + (price * tax)
     return total
-
 
 
 # Código Bom

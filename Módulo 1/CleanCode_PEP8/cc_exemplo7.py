@@ -17,13 +17,16 @@ def generate_report(data):
 def filter_data(data):
     return [d for d in data if d > 0]
 
+
 def calculate_average(data):
     return sum(data) / len(data)
+
 
 def print_report(filtered_data, avg):
     print("Relatório")
     print("Dados filtrados:", filtered_data)
     print("Média:", avg)
+
 
 def generate_report(data):
     filtered_data = filter_data(data)

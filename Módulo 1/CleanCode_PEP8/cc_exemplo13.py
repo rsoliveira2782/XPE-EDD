@@ -1,8 +1,9 @@
-## Não utilização de princípios da Orientação a Objetos
-## p.e. encapsulamento
+# Não utilização de princípios da Orientação a Objetos
+# p.e. encapsulamento
 
 # Código Ruim
 item_price = 50
+
 
 def apply_discount(discount):
     global item_price
@@ -16,6 +17,7 @@ class Item:
 
     def apply_discount(self, discount):
         self.price -= discount
+
 
 item = Item(50)
 item.apply_discount(10)
