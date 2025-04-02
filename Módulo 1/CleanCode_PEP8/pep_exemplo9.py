@@ -8,8 +8,9 @@ def function_two():
 
 
 # Código Bom
-def function_one():
+def function_one_b():
     pass
 
-def function_two():
+
+def function_two_b():
     pass
