@@ -31,8 +31,9 @@ if __name__ == "__main__":
                         help='interval of generating fake data in seconds')
     parser.add_argument('-n', type=int, default=1,
                         help='sample size')
-    parser.add_argument('--connection-string', '-cs', dest="connection_string", 
-                        type=str, default='postgresql://postgres:postgres@localhost:5432/postgres',
+    parser.add_argument('--connection-string', '-cs', dest="connection_string",
+                        type=str, default=('postgresql://postgres:postgres@'
+                                           'localhost:5432/postgres'),
                         help='Connection string to the database')
     parser.add_argument('--silent', type=str2bool, nargs='?',
                         const=True, default=False,
@@ -54,15 +55,18 @@ if __name__ == "__main__":
     # Gera dados fake a faz ingestão
     while True:
         nome = [faker.name() for i in range(args.n)]
-        gender = [np.random.choice(["M", "F"], p=[0.5, 0.5]) for i in range(args.n)]
+        gender = [np.random.choice(["M", "F"], p=[0.5, 0.5])
+                  for i in range(args.n)]
         endereco = [faker.address() for i in range(args.n)]
         telefone = [faker.phone_number() for i in range(args.n)]
         email = [faker.safe_email() for i in range(args.n)]
         foto = [faker.image_url() for i in range(args.n)]
-        nascimento = [faker.date_of_birth().strftime("%Y-%m-%d") for i in range(args.n)]
+        nascimento = [faker.date_of_birth().strftime("%Y-%m-%d")
+                      for i in range(args.n)]
         profissao = [faker.job() for i in range(args.n)]
         # dt_update  = [datetime.now() for i in range(args.n)]
-        dt_update = [datetime.now() - timedelta(hours=1, minutes=0) for i in range(args.n)]
+        dt_update = [datetime.now() - timedelta(hours=1, minutes=0)
+                     for i in range(args.n)]
 
         df = pd.DataFrame({
             "nome": nome,
