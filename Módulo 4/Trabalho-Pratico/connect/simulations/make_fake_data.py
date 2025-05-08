@@ -6,16 +6,18 @@ from faker import Faker
 import time
 from datetime import datetime, timedelta
 
+
 # função para parsear a saída do parâmetro SILENT
 def str2bool(v):
     if isinstance(v, bool):
-       return v
+        return v
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
         return False
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
+
 
 # Instancia a classe Faker
 faker = Faker()
@@ -38,12 +40,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    print(f"Args parsed:")
+    print("Args parsed:")
     print(f"Interval: {args.interval}")
     print(f"Sample size; {args.n}")
     print(f"Connection string: {args.connection_string}", end='\n\n')
 
-    #-----------------------------------------------------------------
+    # -----------------------------------------------------------------
 
     engine = create_engine(args.connection_string)
 
@@ -51,16 +53,16 @@ if __name__ == "__main__":
 
     # Gera dados fake a faz ingestão
     while True:
-        nome       = [faker.name() for i in range(args.n)]
-        gender     = [np.random.choice(["M", "F"], p=[0.5, 0.5]) for i in range(args.n)]
-        endereco   = [faker.address() for i in range(args.n)]
-        telefone   = [faker.phone_number() for i in range(args.n)]
-        email      = [faker.safe_email() for i in range(args.n)]
-        foto       = [faker.image_url() for i in range(args.n)]
+        nome = [faker.name() for i in range(args.n)]
+        gender = [np.random.choice(["M", "F"], p=[0.5, 0.5]) for i in range(args.n)]
+        endereco = [faker.address() for i in range(args.n)]
+        telefone = [faker.phone_number() for i in range(args.n)]
+        email = [faker.safe_email() for i in range(args.n)]
+        foto = [faker.image_url() for i in range(args.n)]
         nascimento = [faker.date_of_birth().strftime("%Y-%m-%d") for i in range(args.n)]
-        profissao  = [faker.job() for i in range(args.n)]
-        dt_update  = [datetime.now() for i in range(args.n)]
-        # dt_update  = [datetime.now() - timedelta(hours=1, minutes=0) for i in range(args.n)]
+        profissao = [faker.job() for i in range(args.n)]
+        # dt_update  = [datetime.now() for i in range(args.n)]
+        dt_update = [datetime.now() - timedelta(hours=1, minutes=0) for i in range(args.n)]
 
         df = pd.DataFrame({
             "nome": nome,
