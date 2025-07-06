@@ -46,6 +46,12 @@ docker-compose up -d
 
 ## 5 - Executar o gerador de dados *fake*
 
+Instale as dependências:
+
+```bash
+python simulations/start.py
+```
+
 Em seguida, execute o gerador de dados fake.
 
 ```bash
