@@ -171,3 +171,35 @@ Content-Type: application/vnd.kafka.json.v2+json
     ]
 }
 ```
+
+## 18 - API Gateway:
+
+- Criar
+
+## 19 - Testes Extras:
+
+```
+curl -X POST http://[IP]:8082/consumers/meu-grupo \
+  -H "Content-Type: application/vnd.kafka.v2+json" \
+  -d '{
+    "name": "meu-consumidor",
+    "format": "json",
+    "auto.offset.reset": "earliest"
+  }'
+```
+
+```
+curl -X POST http://[IP]:8082/consumers/meu-grupo/instances/meu-consumidor/subscription \
+  -H "Content-Type: application/vnd.kafka.v2+json" \
+  -d '{
+    "topics": ["meu-topico"]
+  }'
+```
+
+```
+curl -X GET http://[IP]:8082/consumers/meu-grupo/instances/meu-consumidor/records \
+  -H "Accept: application/vnd.kafka.json.v2+json"
+```
+
+
+
