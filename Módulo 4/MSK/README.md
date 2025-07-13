@@ -63,12 +63,12 @@ cd bin
 
 Criar o tópico
 ```bash
-./kafka-topics.sh --create --topic demo_topic --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092 --replication-factor 3 --partitions 1
+./kafka-topics.sh --create --topic demo_topic --bootstrap-server ........ --replication-factor 3 --partitions 1
 ```
 
 Listar o tópico
 ```bash
-./kafka-topics.sh --list --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092
+./kafka-topics.sh --list --bootstrap-server .......
 ```
 
 
@@ -77,7 +77,7 @@ Listar o tópico
     - Verificar o bootstrap-server no "View Client Information"
 
 ```bash
-./kafka-console-producer.sh --topic demo_topic --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092
+./kafka-console-producer.sh --topic demo_topic --bootstrap-server ......
 ```
 
 ## 12 - Criar o Console Consumer
@@ -85,7 +85,7 @@ Listar o tópico
     - Verificar o bootstrap-server no "View Client Information"
 
 ```bash
-./kafka-console-consumer.sh --topic demo_topic --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092 --from-beginning
+./kafka-console-consumer.sh --topic demo_topic --bootstrap-server ...... --from-beginning
 ```
 
 ## 13 - Instalando a interface de API Rest
