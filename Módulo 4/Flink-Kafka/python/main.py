@@ -1,17 +1,19 @@
-#pip install faker
-#pip install confluent_kafka
-#pip install simplejson
+# pip install faker
+# pip install confluent_kafka
+# pip install simplejson
 
 import random
-import datetime
+# import datetime
 import time
 
 from faker import Faker
 from confluent_kafka import SerializingProducer
 from datetime import datetime
+from zoneinfo import ZoneInfo
 import json
 
 fake = Faker()
+
 
 def generate_sales_transaction():
     user = fake.simple_profile()
@@ -26,16 +28,17 @@ def generate_sales_transaction():
         "productBrand": random.choice(['apple', 'samsung', 'xiaomi', 'microsoft', 'sony']),
         "currency": random.choice(['BRL', 'USD', 'EUR']),
         "customerId": user['username'],
-        "transactionDate": datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%f%z'),
+        "transactionDate": datetime.now(ZoneInfo("America/Sao_Paulo")).strftime('%Y-%m-%dT%H:%M:%S.%f'),
         "paymentMethod": random.choice(['cartao de credito', 'cartao debito', 'paypal', 'dinhero'])
     }
 
+
 def main():
 
-    #'bootstrap.servers':'127.0.0.1:9092'
+    # 'bootstrap.servers':'127.0.0.1:9092'
     topic = 'sales-transactions'
     producer = SerializingProducer({
-            'bootstrap.servers':'172.17.0.1:9092'
+            'bootstrap.servers':'localhost:9092'
         })
 
     while True:
@@ -61,6 +64,7 @@ def main():
 
         except Exception as e:
             print(e)
+
 
 def delivery_report(err, msg):
     if err is not None:
