@@ -44,7 +44,7 @@ Pré-requisitos:
 ## 9 - Instalar o Java e o Kafka Client
 
 ```bash
-sudo yum install java-17-amazon-corretto
+sudo yum install java-17-amazon-corretto -y
 
 wget https://archive.apache.org/dist/kafka/3.8.0/kafka_2.12-3.8.0.tgz
 
