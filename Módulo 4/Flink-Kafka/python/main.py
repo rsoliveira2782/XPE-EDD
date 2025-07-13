@@ -38,7 +38,7 @@ def main():
     # 'bootstrap.servers':'127.0.0.1:9092'
     topic = 'sales-transactions'
     producer = SerializingProducer({
-            'bootstrap.servers':'localhost:9092'
+            'bootstrap.servers': 'localhost:9092'
         })
 
     while True:
@@ -57,7 +57,7 @@ def main():
             producer.poll(0)
 
             time.sleep(0.5)
-        
+
         except BufferError:
             print("Buffer esta cheio. Espere alguns instantes...")
             time.sleep(1)
