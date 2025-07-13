@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 
 public class DataStreamJob {
 
-	static String jdbcUrl = "jdbc:postgresql://172.18.0.3:5432/postgres";
+	static String jdbcUrl = "jdbc:postgresql://172.18.0.2:5432/postgres";
 	static String username = "postgres";
 	static String password = "postgres";
 
@@ -29,7 +29,7 @@ public class DataStreamJob {
 		String topicName = "sales-transactions";
 
 		KafkaSource<Transaction> source = KafkaSource.<Transaction>builder()
-												.setBootstrapServers("172.17.0.1:9092")
+												.setBootstrapServers("192.168.0.245:9092")
 												.setTopics(topicName)
 												.setGroupId("flink-group")
 												.setStartingOffsets(OffsetsInitializer.earliest())
@@ -38,6 +38,8 @@ public class DataStreamJob {
 
 		//busca os dados do Kafka
 		DataStream<Transaction> transactionStream = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka source");
+
+//		transactionStream.print();
 
 		//opcoes para o banco de dados
 		JdbcExecutionOptions executionOptions = new JdbcExecutionOptions.Builder()
@@ -110,7 +112,7 @@ public class DataStreamJob {
 		//cria a tabela de vendas_por_categoria
 		transactionStream.addSink(JdbcSink.sink(
 			"CREATE TABLE IF NOT EXISTS sales_per_category (" +
-					"sales_per_category_id TIMESTAMP PRIMARY KEY, " +
+					"sales_per_category_id TIMESTAMPTZ PRIMARY KEY, " +
 					"product_category VARCHAR(255), " +
 					"total_amount DOUBLE PRECISION " +
 					")", (JdbcStatementBuilder<Transaction>) (preparedStatement, salesTransaction) -> {
@@ -132,9 +134,9 @@ public class DataStreamJob {
 					"total_amount  = EXCLUDED.total_amount " +
 					"WHERE sales_per_category.sales_per_category_id = EXCLUDED.sales_per_category_id",
 		(JdbcStatementBuilder<Transaction>) (preparedStatement, salesTransaction) -> {
-				preparedStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
-				preparedStatement.setString(2, salesTransaction.getProductCategory());
-				preparedStatement.setDouble(3, salesTransaction.getTotalAmount());
+			preparedStatement.setTimestamp(1, Timestamp.valueOf(java.time.LocalDateTime.now(java.time.ZoneId.of("America/Sao_Paulo"))));
+			preparedStatement.setString(2, salesTransaction.getProductCategory());
+			preparedStatement.setDouble(3, salesTransaction.getTotalAmount());
 		}, executionOptions, connectionOptions))
 			.name("A transação foi inserida com sucesso");
 

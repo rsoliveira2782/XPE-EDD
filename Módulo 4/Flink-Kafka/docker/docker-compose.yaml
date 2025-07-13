@@ -2,7 +2,7 @@ version: '3'
 services:
 
   jobmanager:
-    image: ${FLINK_DOCKER_IMAGE_NAME:-flink}
+    image: flink:1.19.3-scala_2.12-java17
     expose:
       - "6123"
     ports:
@@ -12,10 +12,9 @@ services:
       - proxynet
     environment:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
-      - FLINK_DOCKER_IMAGE_NAME=flink:1.18.1-scala_2.12-java17
 
   taskmanager:
-    image: ${FLINK_DOCKER_IMAGE_NAME:-flink}
+    image: flink:1.19.3-scala_2.12-java17
     expose:
       - "6121"
       - "6122"
@@ -28,7 +27,6 @@ services:
       - proxynet
     environment:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
-      - FLINK_DOCKER_IMAGE_NAME=flink:1.18.1-scala_2.12-java17
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.0
@@ -59,7 +57,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://172.17.0.1:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://192.168.0.245:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
