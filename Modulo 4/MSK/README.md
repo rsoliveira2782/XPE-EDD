@@ -44,13 +44,13 @@ Pré-requisitos:
 ## 9 - Instalar o Java e o Kafka Client
 
 ```bash
-sudo yum install java-17-amazon-corretto
+sudo yum install java-17-amazon-corretto -y
 
-wget https://archive.apache.org/dist/kafka/3.6.0/kafka_2.12-3.6.0.tgz
+wget https://archive.apache.org/dist/kafka/3.8.0/kafka_2.12-3.8.0.tgz
 
-tar -xvf kafka_2.12-3.6.0.tgz
+tar -xvf kafka_2.12-3.8.0.tgz
 
-cd kafka_2.12-3.6.0
+cd kafka_2.12-3.8.0
 ```
 
 ## 10 - Criar o tópico
@@ -63,12 +63,12 @@ cd bin
 
 Criar o tópico
 ```bash
-./kafka-topics.sh --create --topic demo_topic --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092 --replication-factor 3 --partitions 1
+./kafka-topics.sh --create --topic demo_topic --bootstrap-server ........ --replication-factor 3 --partitions 1
 ```
 
 Listar o tópico
 ```bash
-./kafka-topics.sh --list --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092
+./kafka-topics.sh --list --bootstrap-server .......
 ```
 
 
@@ -77,7 +77,7 @@ Listar o tópico
     - Verificar o bootstrap-server no "View Client Information"
 
 ```bash
-./kafka-console-producer.sh --topic demo_topic --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092
+./kafka-console-producer.sh --topic demo_topic --bootstrap-server ......
 ```
 
 ## 12 - Criar o Console Consumer
@@ -85,7 +85,7 @@ Listar o tópico
     - Verificar o bootstrap-server no "View Client Information"
 
 ```bash
-./kafka-console-consumer.sh --topic demo_topic --bootstrap-server b-1.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-3.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092 --from-beginning
+./kafka-console-consumer.sh --topic demo_topic --bootstrap-server ...... --from-beginning
 ```
 
 ## 13 - Instalando a interface de API Rest
@@ -117,7 +117,7 @@ PLAINTEXT://b-2.myclusterkafka01.mjat97.c21.kafka.us-east-1.amazonaws.com:9092,P
 
 ## 16 - Testar a API:
 
-    - http://18.206.205.232:8082/topics/demo_topic
+    - http://[IP Público da EC2 CLIENTE]:8082/topics/demo_topic
 
 ## 17 - Postman:
 
@@ -171,3 +171,35 @@ Content-Type: application/vnd.kafka.json.v2+json
     ]
 }
 ```
+
+## 18 - API Gateway:
+
+- Criar
+
+## 19 - Testes Extras:
+
+```
+curl -X POST http://[IP]:8082/consumers/meu-grupo \
+  -H "Content-Type: application/vnd.kafka.v2+json" \
+  -d '{
+    "name": "meu-consumidor",
+    "format": "json",
+    "auto.offset.reset": "earliest"
+  }'
+```
+
+```
+curl -X POST http://[IP]:8082/consumers/meu-grupo/instances/meu-consumidor/subscription \
+  -H "Content-Type: application/vnd.kafka.v2+json" \
+  -d '{
+    "topics": ["meu-topico"]
+  }'
+```
+
+```
+curl -X GET http://[IP]:8082/consumers/meu-grupo/instances/meu-consumidor/records \
+  -H "Accept: application/vnd.kafka.json.v2+json"
+```
+
+
+
